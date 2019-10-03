@@ -10,21 +10,32 @@ fun main() {
     var allOpers = mutableListOf<Char>()
     var newNumber = mutableListOf<Char>()
     var finalNumber = number.split("+","-","*","/").toMutableList()
+    var containsVerify: Boolean = false
 
-    mathOperations.forEach {
-        if (number.contains(it)) {
-            operationsTimes.add(it)
+    number.forEach {
+        if(mathOperations.contains(it)){
+            containsVerify = true
         }
     }
-    for(i in 0..number.length-1) {
-        newNumber.add(number[i])
-    }
-
-    newNumber.forEach{
-        if(operationsTimes.contains(it)){
-            allOpers.add(it)
+    if(containsVerify) {
+        mathOperations.forEach {
+            if (number.contains(it)) {
+                operationsTimes.add(it)
+            }
         }
-    }
+        for (i in 0..number.length - 1) {
+            newNumber.add(number[i])
+        }
 
-    println(evaluer.eval(allOpers,finalNumber))
+        newNumber.forEach {
+            if (operationsTimes.contains(it)) {
+                allOpers.add(it)
+            }
+        }
+
+        println(evaluer.eval(allOpers, finalNumber))
+    }
+    else{
+        println("No operation found...")
+    }
 }
